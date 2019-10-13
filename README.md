@@ -11,3 +11,5 @@ Currently, in order to only perform operation on the data that we are interested
 In a company scenario we considered that an optimum configuration would be a trade-off between the execution time and required costs.
 
 Our approach was to first process the entire data-set using the configuration mentioned in the assignment's manual, namely using 20 **c4.8xlarge** core nodes. The processing time obtained was 430 seconds which, by conversion, means 7 minutes and 10 seconds.
+
+In order to properly optimize our configuration, we checked the *Resource Management* to understand the workflow. We observed that our default configuration (**c4.8xlarge** with 20 core nodes) was using *992.38 GB* out of *1.02TB* of memory an only *181* out of *720* cores available. For this reason, we considered that the amount of memory was, indeed, properly chosen. However, the number of processors was too high for the requirement of the application and resulted in plenty of unused cores. Thereby, we considered decreasing the number of nodes we are using in order to reach the price-costs trade-off. Our aim was to succeed in processing the whole data-set within half an hour with low costs.
