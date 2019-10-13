@@ -14,3 +14,4 @@ Our approach was to first process the entire data-set using the configuration me
 
 In order to properly optimize our configuration, we checked the *Resource Management* to understand the workflow. We observed that our default configuration (**c4.8xlarge** with 20 core nodes) was using *992.38 GB* out of *1.02TB* of memory an only *181* out of *720* cores available. For this reason, we considered that the amount of memory was, indeed, properly chosen. However, the number of processors was too high for the requirement of the application and resulted in plenty of unused cores. Thereby, we considered decreasing the number of nodes we are using in order to reach the price-costs trade-off. Our aim was to succeed in processing the whole data-set within half an hour with low costs.
 
+![Figure 1: Time and Costs with respect to No. Nodes](plotassginment2.png)
