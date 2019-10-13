@@ -17,3 +17,5 @@ In order to properly optimize our configuration, we checked the *Resource Manage
 ![Figure 1: Time and Costs with respect to No. Nodes](plotassginment2.png)
 
 In the above figure we display the time and cost with respect to the number of nodes. We performed an analysis for 5, 10, 15 and 20 nodes. We need to mention that the time metric chosen for this plot was minutes and the one for the costs was dollars ($). We could observe that in all cases the data-set is processed in less than 30 minutes, thus we reached our goal. However, we could observe that the processing time for 5 nodes is almost 2 times higher than the one for 10 nodes. However, when looking at the prices, we could observe that the cost for 5 nodes is just $0.3 lower than the cost for 10 nodes. For this reason, we consider that the best trade-off between costs and time would be the configuration with 10 **c4.8xlarge** nodes. The cost for using 10 **c4.8xlarge** nodes would be **$3.08**.
+
+Besides the aforementioned configurations, we also explored other instance types available on AWS in order to further reduce our costs withouth affecting our performances.
