@@ -27,7 +27,7 @@ Besides the aforementioned configurations, we also explored other instance types
 | c4.8xlarge | 10 | 11.63 | 3.08 |
 | c4.8xlarge | 5 | 20.83 | 2.76 |
 | c4.4xlarge | 20 | 9.03 | 2.39 |
-| c4.4xlarge | 15 | 11.43 | 2.28 |
+| **c4.4xlarge** | **15** | **11.43** | **2.28** |
 | c4.4xlarge | 10 | 16.53 | 2.19 |
 | c4.2xlarge | 20 | 16.53 | 2.19  |
 | c4.2xlarge | 15 | 22.2 | 2.21 |
