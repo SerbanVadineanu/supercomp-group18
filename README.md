@@ -4,7 +4,7 @@ Considering the fact that the DataFrame implementation performed better in the e
 
 The former approach had all the logic encompassed into a single map function which received as input a row containing a date and the aggregated list of strings corresponding to the "allnames" entries of that particular date and was giving as an output a tuple which contained the date and the required list of tuples (string, number of apparitions). This was barely using the Spark SQL capabilities so it was changed drastically.
 
-Currently, in order to only perform operation on the data that we are interested in, a select was performed to isolate the "date" and "allnames" columns. By doing so, the following explode operation, will only copy the date field for the resulting split strings, instead of copying also the remaining 25 unused fields. Moreover, the split is not based anymore on comma and semicolon, but it contains a regular expression that matches every string starting with a comma and ending with non-letter characters. This was done so that the number resulting strings after split will be significantly lowered since the numbers are now completely ignored. However, a filter for strings that contained letters was still performed to ensure that no other characters were kept. Following, the occurrences of words by date was computed by grouping the dataset by date and names and adding the result to a third column. The extraction of the top 10 counted words by date was performed by using a query with window aggregation function. The rank of an entry was defined in relation to its word count and the DateSet was partitioned by date. The qurey returned the top 10 ranked entries from each partition. On the resulting dataset, the counts and the names were merged and, finally, the data was grouped by date and aggregated into a list. To manage the number of output files that the script was writing, the dataset was repartitioned into one partition so that the result will be just one file. 
+Currently, in order to only perform operation on the data that we are interested in, a select was performed to isolate the "date" and "allnames" columns. By doing so, the following explode operation, will only copy the date field for the resulting split strings, instead of copying also the remaining 25 unused fields. Moreover, the split is not based anymore on comma and semicolon, but it contains a regular expression that matches every string starting with a comma and ending with non-letter characters. This was done so that the number resulting strings after split will be significantly lowered since the numbers are now completely ignored. However, a filter for strings that contained letters was still performed to ensure that no other characters were kept. Following, the occurrences of words by date was computed by grouping the dataset by date and names and adding the result to a third column. The extraction of the top 10 counted words by date was performed by using a query with window aggregation function. The rank of an entry was defined in relation to its word count and the dataset was partitioned by date. The qurey returned the top 10 ranked entries from each partition. On the resulting dataset, the counts and the names were merged and, finally, the data was grouped by date and aggregated into a list. To manage the number of output files that the script was writing, the dataset was repartitioned into one partition so that the result will be just one file. 
 
 ### Configuration
 
@@ -19,3 +19,16 @@ In order to properly optimize our configuration, we checked the *Resource Manage
 In the above figure we display the time and cost with respect to the number of nodes. We performed an analysis for 5, 10, 15 and 20 nodes. We need to mention that the time metric chosen for this plot was minutes and the one for the costs was dollars ($). We could observe that in all cases the data-set is processed in less than 30 minutes, thus we reached our goal. However, we could observe that the processing time for 5 nodes is almost 2 times higher than the one for 10 nodes. However, when looking at the prices, we could observe that the cost for 5 nodes is just $0.3 lower than the cost for 10 nodes. For this reason, we consider that the best trade-off between costs and time would be the configuration with 10 **c4.8xlarge** nodes. The cost for using 10 **c4.8xlarge** nodes would be **$3.08**.
 
 Besides the aforementioned configurations, we also explored other instance types available on AWS in order to further reduce our costs withouth affecting our performances.
+
+| Type | No. slaves | Time (min) | Cost ($) |
+|---|---|---|---|
+| c4.8xlarge | 20 | 7.17 | 3.8 |
+| c4.8xlarge | 15 | 8.73 | 3.47 |
+| c4.8xlarge | 10 | 11.63 | 3.08 |
+| c4.8xlarge | 5 | 20.83 | 2.76 |
+| c4.4xlarge | 20 | 9.03 | 2.39 |
+| c4.4xlarge | 15 | 11.43 | 2.28 |
+| c4.4xlarge | 10 | 16.53 | 2.19 |
+| c4.2xlarge | 20 | 16.53 | 2.19  |
+| c4.2xlarge | 15 | 22.2 | 2.21 |
+
