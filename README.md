@@ -8,6 +8,13 @@ Currently, in order to only perform operation on the data that we are interested
 
 ### Configuration
 
+| | Time (min) |
+|---|---|
+| Old Implementation | 9.9 |
+| New Implementation | 7.17 |
+
+The above table presents the improvement of the SQL implementation over the large map approach for the default setting with **c4.8xlarge** with 20 core nodes.
+
 In a company scenario we considered that an optimum configuration would be a trade-off between the execution time and required costs.
 
 Our approach was to first process the entire data-set using the configuration mentioned in the assignment's manual, namely using 20 **c4.8xlarge** core nodes. The processing time obtained was 430 seconds which, by conversion, means 7 minutes and 10 seconds.
